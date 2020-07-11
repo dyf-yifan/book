@@ -9,14 +9,37 @@
     padding-right: 2%;
     padding-bottom: 2%;
 }
+
 .padding-bot {
     padding-bottom: 1%;
 }
+
 .margin {
     margin-top: 2%;
     margin-left: 2%;
     margin-right: 2%;
     margin-bottom: 2%;
+}
+
+/* 阿里巴巴图标 */
+@font-face {
+    font-family: 'iconfont';
+    /* project id 1473594 */
+    src: url('//at.alicdn.com/t/font_1473594_te3ykiowr8.eot');
+    src: url('//at.alicdn.com/t/font_1473594_te3ykiowr8.eot?#iefix') format('embedded-opentype'),
+        url('//at.alicdn.com/t/font_1473594_te3ykiowr8.woff2') format('woff2'),
+        url('//at.alicdn.com/t/font_1473594_te3ykiowr8.woff') format('woff'),
+        url('//at.alicdn.com/t/font_1473594_te3ykiowr8.ttf') format('truetype'),
+        url('//at.alicdn.com/t/font_1473594_te3ykiowr8.svg#iconfont') format('svg');
+}
+
+.iconfont {
+    font-family: 'iconfont' !important;
+    font-size: 19px;
+    font-style: normal;
+    -webkit-font-smoothing: antialiased;
+    -webkit-text-stroke-width: 0.2px;
+    -moz-osx-font-smoothing: grayscale;
 }
 
 /* 各种居中位置 */
@@ -51,6 +74,11 @@
 .y-center {
     display: flex;
     align-items: center;
+}
+
+.x-center {
+    display: flex;
+    justify-content: center;
 }
 
 /* 横轴居中 */
@@ -126,6 +154,10 @@
     border-radius: 50%;
 }
 
+.two-cricle {
+    border-radius: 20px;
+}
+
 /* 边框颜色 */
 .grey-border {
     border-bottom: 1px solid grey;
@@ -170,4 +202,16 @@
 
 .xx-small-s {
     font-size: xx-small;
+}
+
+/* 鼠标指针悬停在元素上时显示相应样式 */
+/* 悬浮于连接上时，通常为手 */
+.hand {
+    cursor: pointer;
+}
+
+/* input输入框无默认样式 */
+.no-input {
+    border: none;
+    outline: none;
 }
