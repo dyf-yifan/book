@@ -29,10 +29,12 @@
           <i class="iconfont">&#xe659;</i>
           <input type="text" class="no-input x-seven-w" v-model="userDto.mobile" placeholder="请输入管理员账号" />
         </div>
-        <div class="xy-ten-two-box xy-center">
+        <div class="xy-eight-two-box xy-center mar">
           <i class="iconfont">&#xe640;</i>
-          <input type="password" class="no-input x-seven-w" v-model="userDto.password" placeholder="请输入密码" />
+          <input type="text" class="no-input x-five-w" v-model="userDto.code" placeholder="请输入验证码" />
+          <button class="code">获取验证码</button>
         </div>
+
         <div class="btn xy-center">
           <div class="buttonl y-ten-h x-five-w two-cricle hand xy-center">登录</div>
         </div>
@@ -102,5 +104,16 @@ input {
 }
 .tab span {
   font-size: 17px;
+}
+.code {
+  width: 50%;
+  height: 60%;
+  background-color: #fff;
+  color: #6495ed;
+  margin: 0;
+  padding: 0;
+  border: 1px solid grey;
+  border-radius: 20px;
+  outline: none;
 }
 </style>
