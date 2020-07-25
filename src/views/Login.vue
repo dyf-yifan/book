@@ -3,14 +3,26 @@
   <div class="d-login x-ten-w xy-center">
     <div class="login-box y-five-h x-three-w">
       <div class="tab x-ten-w xy-center">
-        <span class="tab-item x-center hand" :class="{ active: isActive }" @click="changeTab">学生登录</span>
-        <span class="tab-item x-center hand" :class="{ active: !isActive }" @click="changeTab">管理员登录</span>
+        <span class="tab-item x-center hand" :class="{ active: isActive }" @click="changeTab">账号密码登录</span>
+        <span class="tab-item x-center hand" :class="{ active: !isActive }" @click="changeTab">手机号登录</span>
       </div>
 
       <div class="tab-box x-ten-w" v-show="show && selected === 0">
+        <div class="xy-ten-two-box x-center">
+          <div v-on:click.stop="arrowDown">
+            <p title="请选择身份">{{ unitName }}<i class="iconfont">&#xe698;</i></p>
+            <input type="hidden" name="unit" v-model="unitModel" />
+          </div>
+          <div v-show="isShowSelect" style="display: block;">
+            <div v-for="(item, index) in dataList" :key="index" @click.stop="select(item, index)">
+              {{ item.value }}
+            </div>
+          </div>
+        </div>
+
         <div class="xy-ten-two-box xy-center">
           <i class="iconfont">&#xe659;</i>
-          <input type="text" class="no-input x-seven-w" v-model="userDto.mobile" placeholder="请输入学生账号" />
+          <input type="text" class="no-input x-seven-w" v-model="userDto.mobile" placeholder="请输入账号" />
         </div>
         <div class="xy-ten-two-box xy-center">
           <i class="iconfont">&#xe640;</i>
@@ -32,7 +44,8 @@
         <div class="xy-eight-two-box xy-center mar">
           <i class="iconfont">&#xe640;</i>
           <input type="text" class="no-input x-five-w" v-model="userDto.code" placeholder="请输入验证码" />
-          <button class="code">获取验证码</button>
+          <!-- <button class="code">获取验证码</button> -->
+          <input type="button" class="code" v-model="codeMsg" @click="getCode" :disabled="codeDisabled" />
         </div>
 
         <div class="btn xy-center">
@@ -55,13 +68,54 @@ export default {
         password: '',
         code: ''
       },
-      token: ''
+      token: '',
+      isShowSelect: false,
+      dataList: [
+        { key: -1, value: '学生' },
+        { key: 0, value: '教师' },
+        { key: 1, value: '管理员' }
+      ],
+      unitName: '请选择身份',
+      codeDisabled: false,
+      countdown: 60,
+      codeMsg: '获取验证码',
+      timer: null
     }
   },
   methods: {
     changeTab: function() {
       this.isActive = !this.isActive
       this.selected = this.selected == 0 ? 1 : 0
+    },
+    arrowDown() {
+      this.isShowSelect = !this.isShowSelect
+    },
+    select(item, index) {
+      this.isShowSelect = false
+      console.log(item)
+      console.log(index)
+      this.unitModel = index
+      this.unitName = item.value
+    },
+    // 获取验证码
+    getCode() {
+      // 验证码60秒倒计时
+      if (!this.timer) {
+        this.timer = setInterval(() => {
+          if (this.countdown > 0 && this.countdown <= 60) {
+            this.countdown--
+            if (this.countdown !== 0) {
+              this.codeMsg = '重新发送(' + this.countdown + ')'
+            } else {
+              clearInterval(this.timer)
+              this.codeMsg = '获取验证码'
+              this.countdown = 60
+              this.timer = null
+              this.codeDisabled = false
+            }
+          }
+        }, 1000)
+      }
     }
   }
 }
@@ -96,7 +150,7 @@ input {
   height: 85%;
 }
 .btn {
-  margin-top: 10%;
+  margin-top: 7.5%;
   height: 12%;
 }
 .buttonl {
